@@ -14,3 +14,17 @@ export const signup=async(req,res)=>{
     }
 
 }
+export const signIn=async(req,res)=>{
+    const {email,password}=req.body
+    const user=await userModel.findOne({email})
+    if(user){
+        const match=await bcrypt.compare(password,user.password)
+        if(match){
+            res.json({msg:'login',user:user._id})
+        }else{
+            res.json({msg:'password incorrect'})
+        }
+    }else{
+        res.json({msg:'account not fount'})
+    }
+}

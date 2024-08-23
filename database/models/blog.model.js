@@ -4,7 +4,8 @@ const blogSchema= mongoose.Schema({
     title:String,
     desc:String,
     createdBy:{
-        type:mongoose.Types.ObjectId()
+        type:mongoose.Types.ObjectId,
+        ref:'user'
     }
 },{
     timestamps:true
