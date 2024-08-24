@@ -2,7 +2,7 @@ import { blogModel } from "../../../database/models/blog.model.js"
 
 export const addBlog=async(req,res)=>{
     const{title,desc,createdBy}=req.body
-    await blogModel.insertMany({title,desc,createdBy})
+    await blogModel.insertMany({title,desc,createdBy:req.userId})
     res.json({msg:'success'})
 }
 export const getAllBlog=async(req,res)=>{
