@@ -2,19 +2,21 @@ import { userModel } from "../../../database/models/user.model.js"
 import bcrypt from 'bcrypt'
 import generateToken from "../../../utils/generateToken.js"
 
-export const signup=async(req,res)=>{
-    const {name,email,password}=req.body
-    const user=await userModel.findOne({email})
-    if(user){
-        res.json({msg:'user already exist'})
-    }else{
-        bcrypt.hash(password,Number( process.env.ROUND),async function(err, hash) {
-            await userModel.insertMany({name,email,password:hash})
-            res.json({msg:'success'})
-        });
-     
-    }
 
+export const signup=async(req,res)=>{
+  
+        const user=await userModel.findOne({email})
+        if(user){
+            res.json({msg:'user already exist'})
+        }else{
+            bcrypt.hash(password,Number( process.env.ROUND),async function(err, hash) {
+                await userModel.insertMany({name,email,password:hash})
+                res.json({msg:'success'})
+            });
+        
+        }
+   
+    
 }
 export const signIn=async(req,res)=>{
     const {email,password}=req.body
